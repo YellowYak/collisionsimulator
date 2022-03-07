@@ -7,14 +7,22 @@ let myCanvas = new Canvas('myCanvas', document.body, 800, 600);
 myCanvas.create();
 
 const particles = [];
-particles.push(new Particle({ name: 'Scott', x: 333, y: 200, radius: 100, mass: 8, speed: 2, direction: 155, color: colorMap[7] }));
-particles.push(new Particle({ name: 'Big Boy', x: 130, y: 130, radius: 40, mass: 4, speed: 1, direction: 13, color: colorMap[3] }));
-particles.push(new Particle({ name: 'Big Boy', x: 230, y: 312, radius: 40, mass: 4, speed: 1, direction: 69, color: colorMap[3] }));
-particles.push(new Particle({ name: 'Big Boy', x: 30, y: 30, radius: 40, mass: 4, speed: 1, direction: 113, color: colorMap[3] }));
-particles.push(new Particle({ name: 'Big Boy', x: 111, y: 120, radius: 40, mass: 4, speed: 1, direction: 321, color: colorMap[3] }));
-particles.push(new Particle({ name: 'Big Boy', x: 333, y: 100, radius: 40, mass: 4, speed: 1, direction: 11, color: colorMap[3] }));
-particles.push(new Particle({ name: 'Big Boy', x: 233, y: 230, radius: 40, mass: 4, speed: 1, direction: 188, color: colorMap[3] }));
-
+const PARTICLE_COUNT = 50;
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+    const mass = getRandomInt(9);
+    particles.push(
+        new Particle({ 
+            name: `Particle ${i+1}`,
+            x: getRandomInt(790),
+            y: getRandomInt(590),
+            radius: 10,
+            mass: mass, 
+            speed: getRandomInt(10) + 1,
+            direction: getRandomInt(360),
+            color: colorMap[mass]
+        })
+    );
+}
 
 setInterval(updateWorld, 1);
 
@@ -34,6 +42,8 @@ function updateWorld() {
             }
         }
     };
+}
 
-
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
