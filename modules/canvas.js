@@ -11,8 +11,8 @@ class Canvas {
     create() {
         if (this.ctx === null) {
             // Create canvas and context
-            let divWrapper = document.createElement('div');
-            let canvasElem = document.createElement('canvas');
+            const divWrapper = document.createElement('div');
+            const canvasElem = document.createElement('canvas');
 
             this.parent.appendChild(divWrapper);
             divWrapper.appendChild(canvasElem);

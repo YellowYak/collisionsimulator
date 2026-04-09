@@ -67,7 +67,7 @@ class StatusBoard {
             tr.appendChild(td);
 
             td = document.createElement('td');
-            td.innerHTML = `${p.direction.toFixed(0)}&deg`;
+            td.textContent = `${p.direction.toFixed(0)}°`;
             tr.appendChild(td);
         });
     }
