@@ -52,7 +52,7 @@ class Particle {
 
         // Determine collision angle
         const dx = v2ix - v1ix;
-        const dy = v2iy - v2iy;
+        const dy = v2iy - v1iy;
         let phi = Math.PI / 2;
         if (dx !== 0) {
             phi = Math.atan(dy / dx);
@@ -87,6 +87,33 @@ class Particle {
 
         otherParticle.speed = v2f;
         otherParticle.direction = ang2f;
+    }
+
+    separateFrom(otherParticle) {
+        const overlapX = (this.radius + otherParticle.radius) / 2
+            - Math.abs((this.x + this.radius / 2) - (otherParticle.x + otherParticle.radius / 2));
+        const overlapY = (this.radius + otherParticle.radius) / 2
+            - Math.abs((this.y + this.radius / 2) - (otherParticle.y + otherParticle.radius / 2));
+
+        if (overlapX < overlapY) {
+            const push = overlapX / 2 + 1;
+            if (this.x < otherParticle.x) {
+                this.x -= push;
+                otherParticle.x += push;
+            } else {
+                this.x += push;
+                otherParticle.x -= push;
+            }
+        } else {
+            const push = overlapY / 2 + 1;
+            if (this.y < otherParticle.y) {
+                this.y -= push;
+                otherParticle.y += push;
+            } else {
+                this.y += push;
+                otherParticle.y -= push;
+            }
+        }
     }
 
     findAngle(x, y) {

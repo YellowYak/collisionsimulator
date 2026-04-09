@@ -11,16 +11,16 @@ let myStatusBoard = new StatusBoard(document.body);
 myStatusBoard.create();
 
 const particles = [];
-const PARTICLE_COUNT = 25;
+const PARTICLE_COUNT = 50;
 for (let i = 0; i < PARTICLE_COUNT; i++) {
     const mass = getRandomInt(3) + 1;
     particles.push(
-        new Particle({ 
+        new Particle({
             name: `Particle ${i+1}`,
             x: getRandomInt(790),
             y: getRandomInt(590),
             radius: 10,
-            mass: mass, 
+            mass: mass,
             speed: getRandomInt(5) + 1,
             direction: getRandomInt(360),
             color: colorMap[mass]
@@ -48,6 +48,7 @@ function updateWorld() {
             if (currentParticle.collidedWith(checkingParticle)) {
                 console.log(`${currentParticle.name} collided with ${checkingParticle.name}`);
                 currentParticle.collision(checkingParticle);
+                currentParticle.separateFrom(checkingParticle);
             }
         }
     };
